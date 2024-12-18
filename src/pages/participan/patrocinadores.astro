@@ -150,13 +150,44 @@ const patrocinadores = [
 
     <div class="patrocinadores">
         {patrocinadores.map(patrocinador => (
-            <Colaborador {...patrocinador} />
+            <div>
+                <Colaborador {...patrocinador} />
+            </div>
         ))}
     </div>
 </Layout>
 
 <style>
-.patrocinadores {
-    /* Estilos para el contenedor de patrocinadores */
+.patrocinadores > div {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
 }
+
+.patrocinadores > div.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const patrocinadores = document.querySelectorAll('.patrocinadores > div');
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        patrocinadores.forEach((element) => observer.observe(element));
+    });
+</script>
