@@ -4,12 +4,14 @@ const { nombre, descripciones, logo, web, rrss } = Astro.props;
 ---
 
 <div class="colaborador">
-    <img src={logo} alt={`Logotipo de ${nombre}`} class="logo" />
     <div class="contenido">
+        <img src={logo} alt={`Logotipo de ${nombre}`} class="logo" />
         <h3 class="nombre">{nombre}</h3>
-        {descripciones && descripciones.map((descripcion: string, index: string) => (
-            <p data-key={index} class="descripcion">{descripcion}</p>
-        ))}
+        <div class="descripcion">
+            {descripciones && descripciones.map((descripciones: string, index: string) => (
+                <p data-key={index} class="descripcion">{descripciones}</p>
+            ))}
+        </div>
         <a href={web} target="_blank" class="web-link">Sitio Web</a>
         <div class="redes-sociales">
             {Object.entries(rrss).map(([red, enlace]) => (
@@ -25,28 +27,31 @@ const { nombre, descripciones, logo, web, rrss } = Astro.props;
     --color-texto: #ffffff;
     --color-acento: #00adb5;
     --fuente-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    --tamano-texto: 16px;
+    --tamano-texto: 15px;
     --espaciado: 20px;
 }
 
 .colaborador {
-    background-color: var(--color-fondo);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+}
+
+.contenido{
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: var(--espaciado);
-    padding-left: 10%;
-    padding-right: 10%;
-    transition: transform 0.3s ease;
-    max-width: 100%;
     margin: 5%;
-
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    background-color: #00adb5;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .logo {
+    margin-top: var(--espaciado);
     width: 200px;
     height: auto;
     margin-bottom: var(--espaciado);
@@ -57,9 +62,9 @@ const { nombre, descripciones, logo, web, rrss } = Astro.props;
 }
 
 .nombre {
-    font-size: 1.25rem;
+    font-size: 2rem;
     font-weight: bold;
-    color: var(--color-acento);
+    color: var(--color-fondo);
     margin-bottom: var(--espaciado);
     font-family: var(--fuente-principal);
 }
@@ -75,7 +80,7 @@ const { nombre, descripciones, logo, web, rrss } = Astro.props;
 
 .web-link {
     display: inline-block;
-    background-color: var(--color-acento);
+    background-color: rgb(0 68 101 / var(--tw-bg-opacity));
     color: var(--color-texto);
     border-radius: 20px;
     padding: 10px 15px;
@@ -85,7 +90,7 @@ const { nombre, descripciones, logo, web, rrss } = Astro.props;
 }
 
 .web-link:hover {
-    background-color: darken(var(--color-acento), 10%);
+    background-color: rgb(17 25 40 / var(--tw-bg-opacity));
 }
 
 .redes-sociales {
@@ -93,12 +98,13 @@ const { nombre, descripciones, logo, web, rrss } = Astro.props;
     justify-content: center;
     gap: 10px;
     margin-top: var(--espaciado);
+    margin-bottom: var(--espaciado);
 }
 
 .rrss-link {
     /* Estilos para botones a redes sociales se mantienen */
     display: inline-block;
-    background: rgb(0, 100, 113);
+    background: rgb(0 68 101 / var(--tw-bg-opacity));
     color: white;
     border-radius: 20px;
     padding: 5px 15px;
@@ -107,7 +113,7 @@ const { nombre, descripciones, logo, web, rrss } = Astro.props;
 }
 
 .rrss-link:hover {
-    background: rgb(14, 40, 89);
+    background-color: rgb(17 25 40 / var(--tw-bg-opacity));
 }
 
 @media (max-width: 768px) {
