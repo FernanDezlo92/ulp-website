@@ -4,9 +4,9 @@ const { nombre, descripciones, logo, web, rrss } = Astro.props;
 ---
 
 <div class="colaborador">
-    <div class="contenido">
+    <div class="contenido bg-cyan-600 dark:bg-cyan-950">
         <img src={logo} alt={`Logotipo de ${nombre}`} class="logo" />
-        <h3 class="nombre">{nombre}</h3>
+        <h3 class="nombre text-cyan-950 dark:text-cyan-600 font-bold">{nombre}</h3>
         <div class="descripcion">
             {descripciones && descripciones.map((descripciones: string, index: string) => (
                 <p data-key={index} class="descripcion">{descripciones}</p>
@@ -46,7 +46,6 @@ const { nombre, descripciones, logo, web, rrss } = Astro.props;
     margin: 5%;
     border-radius: 10px;
     transition: transform 0.3s ease;
-    background-color: #00adb5;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -63,8 +62,6 @@ const { nombre, descripciones, logo, web, rrss } = Astro.props;
 
 .nombre {
     font-size: 2rem;
-    font-weight: bold;
-    color: var(--color-fondo);
     margin-bottom: var(--espaciado);
     font-family: var(--fuente-principal);
 }
@@ -119,6 +116,10 @@ const { nombre, descripciones, logo, web, rrss } = Astro.props;
 @media (max-width: 768px) {
     .colaborador {
         flex-direction: column;
+    }
+
+    .contenido{
+        width: 90%;
     }
 
     .logo {

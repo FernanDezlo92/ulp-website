@@ -136,15 +136,45 @@ const colaboradores = [
         <Fragment slot="texto">Conoce a los colaboradores que hacen posible este evento.</Fragment>
     </Breadcrumb>
 
-    <div class="colaboradores">
+    <div class="colaboradores bg-white dark:bg-dark-2">
         {colaboradores.map(colaborador => (
-            <Colaborador {...colaborador} />
+            <div>
+                <Colaborador {...colaborador} />
+            </div>
         ))}
     </div>
 </Layout>
 
 <style>
-.colaboradores {
-    /* Estilos para el contenedor de colaboradores */
+.colaboradores > div {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+
+.colaboradores > div.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const colaboradores = document.querySelectorAll('.colaboradores > div');
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        colaboradores.forEach((element) => observer.observe(element));
+    });
+</script>
