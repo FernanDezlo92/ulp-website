@@ -42,9 +42,29 @@ const blogCollection = defineCollection({
   }),
 });
 
+const patrocinadoresCollection = defineCollection({
+  type: "data",
+  schema: z.object({
+    patrocinadores: z.array(
+      z.object({
+        nombre: z.string(),
+        descripciones: z.array(z.string()),
+        logo: z.string(),
+        web: z.string(),
+        titulo1: z.string(),
+        titulo2: z.string(),
+        colortitulo2: z.string(),
+        botonMas: z.string(),
+        categoria: z.enum(["Platino", "Oro", "Plata", "Bronce"]),
+        rrss: z.record(z.string()),
+      })
+    ),
+  }),
+});
 
 // 3. Export a single `collections` object to register your collection(s)
 //    This key should match your collection directory name in "src/content"
 export const collections = {
   'blog': blogCollection,
+  'patrocinadores': patrocinadoresCollection,
 };

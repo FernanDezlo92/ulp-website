@@ -180,14 +180,23 @@ declare module 'astro:content' {
   slug: "f1";
   body: string;
   collection: "blog";
-  data: InferEntrySchema<"blog">
+  data: any
 } & { render(): Render[".md"] };
 "paella.md": {
 	id: "paella.md";
   slug: "paella";
   body: string;
   collection: "blog";
-  data: InferEntrySchema<"blog">
+  data: any
+} & { render(): Render[".md"] };
+};
+"patrocinadores": {
+"patrocinadores.md": {
+	id: "patrocinadores.md";
+  slug: "patrocinadores";
+  body: string;
+  collection: "patrocinadores";
+  data: any
 } & { render(): Render[".md"] };
 };
 
@@ -199,5 +208,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	type ContentConfig = typeof import("../src/content/config.js");
+	type ContentConfig = never;
 }
